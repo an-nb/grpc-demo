@@ -1,0 +1,34 @@
+syntax = "proto3";
+option go_package = "grpc-demo/invoicer";
+
+message Product {
+    string name = 1;
+    int64 price = 2;
+}
+
+// Create
+message CreateRequest {
+    Product product = 1;
+    string sender = 2;
+    string receiver = 3;
+}
+
+message CreateResponse {
+    string message = 1;
+}
+
+// Get
+message GetRequest {
+    string id = 1;
+}
+
+message GetResponse {
+    Product product = 1;
+    string sender = 2;
+    string receiver = 3;
+}
+
+service Invoicer {
+    rpc Create(CreateRequest) returns (CreateResponse);
+    rpc Get(GetRequest) returns (GetResponse);
+}
